@@ -1,0 +1,47 @@
+what is AWS
+AWS means Amazon cloud service
+It is a cloud computing platform that provides a wide range of services like core services,storage,databases,networking services
+It provides 200+ services
+
+
+what is cloud computing
+cloud computing is a delivery of computing services like  core services,storage,databases,networking services
+
+
+
+1.CORE SERVICES:
+------------
+*EC2
+*LAMBDA
+*ELASTIC BEANSTALK
+
+what is EC2
+EC2 means Elastic cloud compute
+It is a core service that helps to create virtual machines and to run our websites or applications
+
+what is lambda
+lambda is a serverless compute service that helps to run our code without managing services
+
+
+
+2.STORAGE SERVICES:
+---------------
+S3
+EFS
+EBS
+
+what is S3
+s3 means simple storage service that helps to store our files in objects forms 
+->we call folders as a buckets
+->high scalability,latency,availabity
+
+what is EBS
+EBS means Elastic block storage that store data in block forms
+->it is used as a virtual harddisk to connect ec2 
+->it can accessible only one ec2 instance at a time
+
+what is EFS
+EFS is a Elastic file system
+->it is a network file system that can shared access file systems across multiple servers
+->it can accessible from multiple ec2 instances at once
+
