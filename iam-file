@@ -9,15 +9,41 @@ cloud computing is a delivery of computing services like  core services,storage,
 
 
 
-1.CORE SERVICES:
-------------
-*EC2
+#CORE SERVICES:
+-----------
+1.COMPUTE SERVICES:
+----------------
+*1.EC2
+ 2.Elb
+ 3.Auto scaling
 *LAMBDA
 *ELASTIC BEANSTALK
 
 what is EC2
 EC2 means Elastic cloud compute
 It is a core service that helps to create virtual machines and to run our websites or applications
+
+
+what is Elb
+Elb means Elastic load balancer
+->load balancer controls all the traffic and shares requests equally with the help of route table across multiple ec2 instances
+->it checks the health status of servers
+->if new server is added ,elb records it in the target group
+->if one server is terminated ,elb stops forwarding requests
+->we have 4 types of elb 
+  1.ALB(Application lb)
+  2.CLB(Classic lb)
+  3.NLB(Network lb)
+  4.GWLB(Gateway lb)
+->we can use autoscaling in elb also,if the traffic is on demand
+
+
+what is Auto scaling
+->when the traffic is on demand,1 server cant control,it can crash
+->by using auto scaling method,it adds new instance on demand and terminates automatically when demand is low
+->it helps to handle traffic spikes and also saves cost during low usage
+->if we use auto scaling method,defnetly we use elb..without elb autoscaling process not usable
+
 
 what is lambda
 lambda is a serverless compute service that helps to run our code without managing services
@@ -26,9 +52,9 @@ lambda is a serverless compute service that helps to run our code without managi
 
 2.STORAGE SERVICES:
 ---------------
-S3
-EFS
-EBS
+*S3
+*EFS
+*EBS
 
 what is S3
 s3 means simple storage service that helps to store our files in objects forms 
@@ -44,4 +70,199 @@ what is EFS
 EFS is a Elastic file system
 ->it is a network file system that can shared access file systems across multiple servers
 ->it can accessible from multiple ec2 instances at once
+
+
+3.DATABASE SERVICES:
+----------------
+*RDS
+*DYNAMO DB
+
+
+4.NETWORK SERVICES:
+-----------------
+*vpc
+*Route 53
+
+what is vpc
+->vpc means virtual private cloud
+->It provides an isolated network that controls who can access what in ur aws..we can create our own vpc
+->Aws provides a default vpc for beginners
+->we have some concepts in vpc
+cidr block     -   
+ip address     -   it gives the size of vpc and subnets
+subnets        -   subnets are smaller network in vpc like a rooms in our home
+ public        -   the subnet with internet connection
+ private       -   the subnet without internet connection
+igw            -   igw gives internet to vpc and public subnet,it is like a gate to our home
+ngw            -   ngw takes internet from igw and sends to private subnet to receive data
+Route table    -   route tables shows routes to specified subnets
+elb            -   elb controls all the requests and shares each requests to all instances
+auto scaling   -   as helps to add instances when the traffic is high and terminate instances when traffic is decrease
+sg             -   used for security purpose..it allows only inbound rules
+nacl           -   used for security purpose..it allows inbound and outbound rules
+
+
+diff b/w sg and nacl
+       sg                                                 nacl
+       --                                                  --
+->security groups                               ->network access control list
+->it acts as a firewall at instance level       ->it acts as a firewall at subnets level
+->it controls only inbound rules                ->it controls inbound and outbound rules
+->stateful in nature                            ->stateless in nature
+->can use max 5 sg                              ->use 1 nacl
+
+
+
+what is Route 53 in aws
+Route 53 service in aws is used for dns hosting service
+->we can buy our domain from aws or from other services
+->aws allows domain from other seller
+->once domain registration is completed,we can record it into hosted zone..
+->hosted zone is the place where the dns records are saved
+->and also route 53 helps to check the health checks of web servers
+ simply say:
+ ---------
+ Route 53 service is used for dns service..it takes the domain name from user and convert into ip address 
+and also it helps to check the health-checkups for web servers
+
+
+
+#SECURITY SERVICES:
+----------------
+*IAM
+*MAF
+
+what is Iam service
+Iam means Identity Access Management
+Identity - Authentication
+->if we use or work on aws services and resources,we cant directly do it,we have an account in aws.
+->this process is authentication..if we have a account in aws,we entered only into aws console but not do anything
+  because of permissions denied
+Access - Authorisation
+->if we use aws services we have an access means permissions
+Iam service helps to provide security access for users to use aws resources
+we have 4 major resources in Iam
+1.Iam user:
+   -----
+we have 2 types of users in aws
+1.Root user
+2.iam user
+->Root user is the owner of the account..so he has access to al services
+iam users are the persons that we give specified access to aws resources
+ ex:if a developer wants to assign a aws..we create as iam user and passwd to login into aws
+ 2.Policies:
+ ---------
+ ->policies is ntg but permissions 
+ ->by attaching policies to iam users,we can access them
+ ->we have 2 types of policies
+    1.Aws managed policy
+    2.custom policy
+->aws already gave some created policies
+->users can create own policies by using json or visual formats as per their needs
+3.Groups:
+-------
+->Groups are combination of iam users i.e; each team has a group like
+  all dev beongs to dev group
+->by attaching policies to each person is slightly hard so we can attach policies directly to groups
+->ex:if we add a new dev into dev group,he has that group permissions.seperately we doesnt add  policies
+4.Iam Roles:
+----------
+->iam roles are used for temporary credentials to access services and resources
+->our data is very secure by using iam roles
+
+
+what is cloud front
+cloud front is a content delivery network service provided by aws
+->it delivers the content to users with high speed and low latency
+Ex(use case):
+---------
+->If a user requests contents..requests goes to neartest cloud front edge location first
+->if the content is cached,cloud front delivers it fastly
+->if the content is not there,cloud front cached data from origin server and cached it into nearest 
+  edge location and delivers fastly
+->and also it cached for future purposes
+Benefits:
+-------
+fast delivery   - delivers the content fastly
+reduce latency  - data travelling is reduces
+security        - allowws https
+scalability     - controls high traffic load
+
+
+diff cloud watch and cloud trail
+cloud watch:
+--------
+->cloud watch is used to monitoring aws services and resources like metrics and logging
+->collect logs from applications and services
+->we set set alarms if something wents wrong
+ex:
+--
+->we set the alarm,when the cpu crosses above 80%,alarms trigger
+->cloud watch notifies us as a sms or email
+->we can view the data on cloud watch dashboards
+cloud trail:
+---------
+->cloud trails is a aws service helps to monitoring users activities 
+->the events that are recorded and delivered it into s3,we checkit in s3
+->we can observe,analize or set alarm to detect this troubleshoot issues
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
